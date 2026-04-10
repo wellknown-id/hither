@@ -2,7 +2,7 @@
 
 hither is a command line program that can conjure up other command line programs. The apps themselves are WASM modules.
 
-A quick prototype is written in Go using wazero as the WASM runtime, and that prototype is in this repository currently.
+A quick prototype was written in Go using wazero as the WASM runtime, and has since been ported to Rust with wasmtime.
 
 The original prompt that created it was this:
 
@@ -16,20 +16,20 @@ It was quick and it was fun, but then we realised, oh wait this is cool! We boug
 
 ## Workstream 1
 
-- [ ] Port everything to Rust and use wasmtime as the runtime.
-- [ ] Build for Windows, Mac, Linux.
-- [ ] Make "hither" build as "hither" instead of "h" and add an "--install" command to copy the "hither" executable to a user bin directory (all platforms).
-- [ ] Update the "--install" command so it accepts an optional "--aliase=h" argument that installs an alias "h" for "hither".
+- [x] Port everything to Rust and use wasmtime as the runtime.
+- [x] Build for Windows, Mac, Linux.
+- [x] Make "hither" build as "hither" instead of "h" and add an "--install" command to copy the "hither" executable to a user bin directory (all platforms).
+- [x] Update the "--install" command so it accepts an optional "--alias=h" argument that installs an alias "h" for "hither".
 
 ## Workstream 2
 
-- [ ] Rewrite the README.md.
+- [x] Rewrite the README.md.
 
 ## Workstream 3
 
-- [ ] Refactor so that example guest "echo" is copied to "./.hither/echo.wasm" instead of "./.hither/example.com/echo.wasm" such that "h echo hello" works.
-- [ ] Add a "to" example like "echo" copied to "./.hither/to.wasm" that works in the following way:
-   - [ ] When a user runs "\[hither\] to" without any arguments it prints a message like:
+- [x] Refactor so that example guest "echo" is copied to "./.hither/echo.wasm" instead of "./.hither/example.com/echo.wasm" such that "h echo hello" works.
+- [x] Add a "to" example like "echo" copied to "./.hither/to.wasm" that works in the following way:
+   - [x] When a user runs "\[hither\] to" without any arguments it prints a message like:
         
         > What would you like to encant? Tell me your wishes.
         > Do you wish for pictures of cats? Then say it, and I shall make it so!
@@ -39,11 +39,11 @@ It was quick and it was fun, but then we realised, oh wait this is cool! We boug
         > Run `hither to financial news today` and I will do as you bid!
 
         Note: The "to" command *just* prints in the interation!
-- [ ] Add a "help" example like "echo" copied to "./.hither/help.wasm" that prints a message like:
+- [x] Add a "help" example like "echo" copied to "./.hither/help.wasm" that prints a message like:
 
         > Hither! If you don't know what to do, you can say "hither list" and I will tell you what you can do!
 
-- [ ] Add a "list" example like "echo" copied to "./.hither/list.wasm" that prints a list of the users hither modules.
+- [x] Add a "list" example like "echo" copied to "./.hither/list.wasm" that prints a list of the users hither modules.
 
 ## Workstream 4
 
