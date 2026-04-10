@@ -48,3 +48,5 @@ It was quick and it was fun, but then we realised, oh wait this is cool! We boug
 ## Workstream 4
 
 - [ ] Research and identify candidate libraries/sdks that can work with OpenAI API compatible inference providers (local AI included, critical must-have) and save the findings to new file ./research/llms.md
+- [ ] Research and identify small and fast vector search that we can bundle, sqlite maybe does this well already.
+- [ ] Find or train a small embedding model.
