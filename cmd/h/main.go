@@ -63,14 +63,29 @@ func findWasm(domain, command string) (string, error) {
 	return "", fmt.Errorf("no .hither/%s/%s.wasm found in . or ~", domain, command)
 }
 
+func cacheDir() string {
+	home, err := os.UserHomeDir()
+	if err != nil {
+		return filepath.Join(os.TempDir(), "hither-cache")
+	}
+	return filepath.Join(home, ".cache", "hither")
+}
+
 func runWasm(wasmBytes []byte, args []string) error {
 	ctx := context.Background()
-	r := wazero.NewRuntime(ctx)
+
+	cache, err := wazero.NewCompilationCacheWithDir(cacheDir())
+	if err != nil {
+		return fmt.Errorf("cache: %w", err)
+	}
+	defer cache.Close(ctx)
+
+	r := wazero.NewRuntimeWithConfig(ctx, wazero.NewRuntimeConfig().WithCompilationCache(cache))
 	defer r.Close(ctx)
 
 	wasi_snapshot_preview1.MustInstantiate(ctx, r)
 
-	_, err := r.NewHostModuleBuilder("h").
+	_, err = r.NewHostModuleBuilder("h").
 		NewFunctionBuilder().
 		WithFunc(func(ctx context.Context, m api.Module, urlPtr, urlLen, bodyPtr, bodyLen, respBuf, respBufLen uint32) uint32 {
 			return doFetch(m, urlPtr, urlLen, bodyPtr, bodyLen, respBuf, respBufLen)
