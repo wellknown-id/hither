@@ -5,10 +5,51 @@ Run WASM guest programs from the command line.
 ## Usage
 
 ```
-h <domain> <command> [args...]
+hither <command> [args...]
 ```
 
-`h` looks for `.wasm` files in `.hither/<domain>/` relative to the current directory, then falls back to `~/.hither/<domain>/`.
+`hither` looks for `.wasm` files in `.hither/` relative to the current directory, then falls back to `~/.hither/`.
+
+### Install
+
+```
+hither --install               # copies hither to ~/.local/bin
+hither --install --alias=h     # also creates a symlink named 'h'
+```
+
+### Included commands
+
+| Command | Description |
+|---------|-------------|
+| `echo`  | Prints its arguments |
+| `help`  | Prints a help message |
+| `list`  | Lists available hither modules |
+| `to`    | Encants your wishes |
+
+### Examples
+
+```
+$ hither echo hello world
+hello world
+
+$ hither list
+Available hither modules:
+  echo
+  help
+  list
+  to
+
+$ hither to pictures of cats
+Your wish is my command! 'pictures of cats'
+
+$ hither to
+What would you like to encant? Tell me your wishes.
+Do you wish for pictures of cats? Then say it, and I shall make it so!
+
+Run `hither to pictures of cats` and your wish is my command!
+
+Run `hither to financial news today` and I will do as you bid!
+```
 
 ## Build
 
@@ -16,7 +57,7 @@ h <domain> <command> [args...]
 make
 ```
 
-This builds the `h` binary and compiles the guest programs into `.hither/example.com/`.
+This builds the `hither` binary and compiles the guest programs into `.hither/`.
 
 ## Test
 
@@ -24,23 +65,18 @@ This builds the `h` binary and compiles the guest programs into `.hither/example
 make test
 ```
 
-## Guests
+## Cross-compile
 
-Guest programs are compiled to WASM (`GOOS=wasip1 GOARCH=wasm`) and placed under `.hither/<domain>/<command>.wasm`.
-
-The host exposes a `fetch` function that guests can import:
-
-```go
-//go:wasmimport h fetch
-func fetch(urlPtr, urlLen, bodyPtr, bodyLen, respBuf, respBufLen uint32) uint32
+```
+make build-linux          # x86_64-unknown-linux-gnu
+make build-mac            # x86_64-apple-darwin
+make build-mac-arm        # aarch64-apple-darwin
+make build-windows        # x86_64-pc-windows-gnu
 ```
 
-### Included guests
+## Guests
 
-| Guest | Description |
-|-------|-------------|
-| `echo` | Prints its arguments |
-| `search` | Queries DuckDuckGo and prints JSON results |
+Guest programs are compiled to WASM (`--target wasm32-wasip1`) and placed under `.hither/<command>.wasm`.
 
 ## Clean
 

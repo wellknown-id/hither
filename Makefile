@@ -1,24 +1,40 @@
-.PHONY: build clean test guests
+.PHONY: build clean test guests all release
+.PHONY: build-linux build-mac build-mac-arm build-windows
 
-GOFLAGS := -trimpath
-GUESTS  := guests/echo guests/search
-DOMAIN  := example.com
-WASMDIR := .hither/$(DOMAIN)
+GUESTS := echo to help list
+WASMTGT := wasm32-wasip1
 
 all: build guests
 
 build:
-	go build $(GOFLAGS) -o h ./cmd/h
+	cargo build
 
-guests: $(patsubst guests/%,$(WASMDIR)/%.wasm,$(GUESTS))
+release:
+	cargo build --release
 
-$(WASMDIR)/%.wasm: guests/%/main.go
-	@mkdir -p $(WASMDIR)
-	GOOS=wasip1 GOARCH=wasm go build $(GOFLAGS) -o $@ ./guests/$*
+build-linux:
+	cargo build --release --target x86_64-unknown-linux-gnu
+
+build-mac:
+	cargo build --release --target x86_64-apple-darwin
+
+build-mac-arm:
+	cargo build --release --target aarch64-apple-darwin
+
+build-windows:
+	cargo build --release --target x86_64-pc-windows-gnu
+
+guests:
+	@mkdir -p .hither
+	@for g in $(GUESTS); do \
+		cd guests/$$g && cargo build --release --target $(WASMTGT) && cd ../..; \
+		cp guests/$$g/target/$(WASMTGT)/release/hither-guest-$$g.wasm .hither/$$g.wasm; \
+	done
 
 test:
-	go test ./...
+	cargo test
 
 clean:
-	rm -f h
+	cargo clean
 	rm -rf .hither
+	@for g in $(GUESTS); do cd guests/$$g && cargo clean && cd ../..; done
