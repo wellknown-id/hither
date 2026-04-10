@@ -47,6 +47,14 @@ It was quick and it was fun, but then we realised, oh wait this is cool! We boug
 
 ## Workstream 4
 
-- [ ] Research and identify candidate libraries/sdks that can work with OpenAI API compatible inference providers (local AI included, critical must-have) and save the findings to new file ./research/llms.md
+- [x] Research and identify candidate libraries/sdks that can work with OpenAI API compatible inference providers (local AI included, critical must-have) and save the findings to new file ./research/llms.md
+- [ ] Choose an path from ./research/llms.md and design a host interface to expose WASM guests in a new file ./ai.wit (don't integrate yet!)
+
+## Workstream 5
+
 - [ ] Research and identify small and fast vector search that we can bundle, sqlite maybe does this well already.
 - [ ] Find or train a small embedding model.
+
+## Workstream 6
+
+- [ ] Research and identify candidate libraries/sdks that could be used to build a Rust based OpenAI API compatible gateway.
