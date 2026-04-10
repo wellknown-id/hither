@@ -57,4 +57,4 @@ It was quick and it was fun, but then we realised, oh wait this is cool! We boug
 
 ## Workstream 6
 
-- [ ] Research and identify candidate libraries/sdks that could be used to build a Rust based OpenAI API compatible gateway.
+- [x] Research and identify candidate libraries/sdks that could be used to build a Rust based OpenAI API compatible gateway.
