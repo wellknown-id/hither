@@ -48,7 +48,7 @@ It was quick and it was fun, but then we realised, oh wait this is cool! We boug
 ## Workstream 4
 
 - [x] Research and identify candidate libraries/sdks that can work with OpenAI API compatible inference providers (local AI included, critical must-have) and save the findings to new file ./research/llms.md
-- [ ] Choose an path from ./research/llms.md and design a host interface to expose WASM guests in a new file ./ai.wit (don't integrate yet!)
+- [x] Choose an path from ./research/llms.md and design a host interface to expose WASM guests in a new file ./ai.wit (don't integrate yet!)
 
 ## Workstream 5
 

@@ -1,0 +1,42 @@
+package hither:ai;
+
+interface provider {
+    enum role {
+        system,
+        user,
+        assistant,
+        tool,
+    }
+
+    record message {
+        role: role,
+        content: string,
+    }
+
+    record completion-request {
+        model: string,
+        messages: list<message>,
+        temperature: option<float32>,
+        max-tokens: option<u32>,
+    }
+
+    record completion-response {
+        message: message,
+    }
+
+    record embedding-request {
+        model: string,
+        input: list<string>,
+    }
+
+    record embedding-response {
+        embeddings: list<list<float32>>,
+    }
+
+    complete: func(request: completion-request) -> result<completion-response, string>;
+    get-embeddings: func(request: embedding-request) -> result<embedding-response, string>;
+}
+
+world ai-guest {
+    import provider;
+}
