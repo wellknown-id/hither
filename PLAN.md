@@ -52,8 +52,8 @@ It was quick and it was fun, but then we realised, oh wait this is cool! We boug
 
 ## Workstream 5
 
-- [ ] Research and identify small and fast vector search that we can bundle, sqlite maybe does this well already.
-- [ ] Find or train a small embedding model.
+- [x] Research and identify small and fast vector search that we can bundle, sqlite maybe does this well already.
+- [x] Find or train a small embedding model.
 
 ## Workstream 6
 
