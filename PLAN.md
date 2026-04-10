@@ -14,18 +14,18 @@ write a go app called hither that installs a command line program 'h' that looks
 
 It was quick and it was fun, but then we realised, oh wait this is cool! We bought hithered.to and hithered.com on the spur of the moment and now we are going to make this a bit more useful for more people.
 
-## Job 1
+## Workstream 1
 
 - [ ] Port everything to Rust and use wasmtime as the runtime.
 - [ ] Build for Windows, Mac, Linux.
 - [ ] Make "hither" build as "hither" instead of "h" and add an "--install" command to copy the "hither" executable to a user bin directory (all platforms).
 - [ ] Update the "--install" command so it accepts an optional "--aliase=h" argument that installs an alias "h" for "hither".
 
-## Job 2
+## Workstream 2
 
 - [ ] Rewrite the README.md.
 
-## Job 3
+## Workstream 3
 
 - [ ] Refactor so that example guest "echo" is copied to "./.hither/echo.wasm" instead of "./.hither/example.com/echo.wasm" such that "h echo hello" works.
 - [ ] Add a "to" example like "echo" copied to "./.hither/to.wasm" that works in the following way:
@@ -44,3 +44,7 @@ It was quick and it was fun, but then we realised, oh wait this is cool! We boug
         > Hither! If you don't know what to do, you can say "hither list" and I will tell you what you can do!
 
 - [ ] Add a "list" example like "echo" copied to "./.hither/list.wasm" that prints a list of the users hither modules.
+
+## Workstream 4
+
+- [ ] Research and identify candidate libraries/sdks that can work with OpenAI API compatible inference providers (local AI included, critical must-have) and save the findings to new file ./research/llms.md
